@@ -1,0 +1,27 @@
+{
+  "name": "DoctrYst-Backend",
+  "version": "1.0.0",
+  "description": "Doctr-Yst is an app which useful for hospitals to book an appointment for doctor, lab and pharmacy details.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "JWT",
+    "Sequelize",
+    "MySQL",
+    "Authentication",
+    "bcryptjs"
+  ],
+  "author": "AjaySharvesh AndrewJonathan ShreepdhiAnandh JeyaSuriya AntonyAlwin SuriyaPrakash",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.39.0"
+  }
+}
