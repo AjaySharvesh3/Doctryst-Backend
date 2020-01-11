@@ -42,23 +42,46 @@ isAdmin = (req, res, next) => {
 		})
 }
 
-isPmOrAdmin = (req, res, next) => {
+isStaff = (req, res, next) => {
+  User.findById(req.userId)
+    .then(user => {
+      user.getRoles().then(roles => {
+        for(let i=0; i<roles.length; i++){
+          console.log(roles[i].name);
+          if(roles[i].name.toUpperCase() === "STAFF"){
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send("Require Staff Role!");
+        return;
+      })
+    })
+}
+
+isDoctor = (req, res, next) => {
 	User.findById(req.userId)
 		.then(user => {
 			user.getRoles().then(roles => {
 				for(let i=0; i<roles.length; i++){
-					if(roles[i].name.toUpperCase() === "PM"){
+					if(roles[i].name.toUpperCase() === "DOCTOR"){
 						next();
 						return;
 					}
 
-					if(roles[i].name.toUpperCase() === "ADMIN"){
+					/*if(roles[i].name.toUpperCase() === "ADMIN"){
 						next();
 						return;
 					}
+
+          if(roles[i].name.toUpperCase() === "STAFF"){
+            next();
+            return;
+          }*/
 				}
 
-				res.status(403).send("Require PM or Admin Roles!");
+				res.status(403).send("Require Doctor Roles!");
 			})
 		})
 }
@@ -66,6 +89,7 @@ isPmOrAdmin = (req, res, next) => {
 const authJwt = {};
 authJwt.verifyToken = verifyToken;
 authJwt.isAdmin = isAdmin;
-authJwt.isPmOrAdmin = isPmOrAdmin;
+authJwt.isStaff = isStaff;
+authJwt.isDoctor = isDoctor;
 
 module.exports = authJwt;

@@ -17,7 +17,9 @@ module.exports = function (app) {
 
 	app.get('/doctryst/api/test/user', [authJwt.verifyToken], controller.userContent);
 
-	app.get('/doctryst/api/test/pm', [authJwt.verifyToken, authJwt.isPmOrAdmin], controller.managementBoard);
+	app.get('/doctryst/api/test/doctor', [authJwt.verifyToken, authJwt.isDoctor], controller.managementBoard);
 
 	app.get('/doctryst/api/test/admin', [authJwt.verifyToken, authJwt.isAdmin], controller.adminBoard);
+
+	app.get('/doctryst/api/test/staff', [authJwt.verifyToken, authJwt.isStaff], controller.staffBoard);
 }

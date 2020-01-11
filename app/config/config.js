@@ -1,4 +1,4 @@
 module.exports = {
   'secret': 'doctryst-super-secret-key',
-  ROLEs: ['USER', 'ADMIN', 'PM']
+  ROLEs: ['USER', 'ADMIN', 'DOCTOR', 'STAFF']
 };

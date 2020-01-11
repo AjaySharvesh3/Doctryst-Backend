@@ -118,6 +118,30 @@ exports.adminBoard = (req, res) => {
 	})
 }
 
+exports.staffBoard = (req, res) => {
+  User.findOne({
+    where: { id: req.userId },
+    attributes: ['name', 'username', 'email'],
+    include: [{
+      model: Role,
+      attributes: ['id', 'name'],
+      through: {
+        attributes: ['userId', 'roleId'],
+      }
+    }]
+  }).then(user => {
+    res.status(200).send({
+      'description': '>>> Staff Contents',
+      'user': user
+    });
+  }).catch(err => {
+    res.status(500).send({
+      'description': 'Can not access Staff Board',
+      'error': err
+    });
+  })
+}
+
 exports.managementBoard = (req, res) => {
 	User.findOne({
 		where: { id: req.userId },
@@ -131,12 +155,12 @@ exports.managementBoard = (req, res) => {
 		}]
 	}).then(user => {
 		res.status(200).send({
-			'description': '>>> Project Management Board',
+			'description': '>>> Doctor Board',
 			'user': user
 		});
 	}).catch(err => {
 		res.status(500).send({
-			'description': 'Can not access Management Board',
+			'description': 'Can not access Doctor Board',
 			'error': err
 		});
 	})
