@@ -2,6 +2,8 @@ const db = require('../config/db.config.js');
 const config = require('../config/config.js');
 const User = db.user;
 const Role = db.role;
+const Doctor = db.doctor;
+const Patient = db.patient;
 
 const Op = db.Sequelize.Op;
 
@@ -32,7 +34,7 @@ exports.signup = (req, res) => {
 	}).catch(err => {
 		res.status(500).send({ reason: err.message });
 	})
-}
+};
 
 exports.signin = (req, res) => {
 	User.findOne({
@@ -68,7 +70,7 @@ exports.signin = (req, res) => {
 	}).catch(err => {
 		res.status(500).send({ reason: err.message });
 	});
-}
+};
 
 exports.userContent = (req, res) => {
 	User.findOne({
@@ -92,7 +94,7 @@ exports.userContent = (req, res) => {
 			'error': err
 		});
 	})
-}
+};
 
 exports.adminBoard = (req, res) => {
 	User.findOne({
@@ -140,7 +142,7 @@ exports.staffBoard = (req, res) => {
       'error': err
     });
   })
-}
+};
 
 exports.managementBoard = (req, res) => {
 	User.findOne({
@@ -164,4 +166,44 @@ exports.managementBoard = (req, res) => {
 			'error': err
 		});
 	})
-}
+};
+
+exports.postAllDoctors = (req, res) => {
+  Doctor.create(req.body)
+    .then(doctor => {
+      res.json(doctor);
+    })
+    .catch(err => {
+      message: `Some error occurred, ${err}`;
+    })
+};
+
+exports.getAllDoctors = (req, res) => {
+  Doctor.findAll()
+    .then((doctor) => {
+      res.json(doctor);
+    })
+    .catch(err => {
+      message: `Some error occurred, ${err}`;
+    });
+};
+
+exports.postAllPatients = (req, res) => {
+  Patient.create(req.body)
+    .then((patient) => {
+      res.json(patient);
+    })
+    .catch(err => {
+      message: `Some error occurred, ${err}`;
+    });
+};
+
+exports.getAllPatients = (req, res) => {
+  Patient.findAll()
+    .then((patient) => {
+      res.json(patient);
+    })
+    .catch(err => {
+      message: `Some error occurred, ${err}`;
+    });
+};

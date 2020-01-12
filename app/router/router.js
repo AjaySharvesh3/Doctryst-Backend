@@ -22,4 +22,14 @@ module.exports = function (app) {
 	app.get('/doctryst/api/test/admin', [authJwt.verifyToken, authJwt.isAdmin], controller.adminBoard);
 
 	app.get('/doctryst/api/test/staff', [authJwt.verifyToken, authJwt.isStaff], controller.staffBoard);
-}
+
+	app.post('/doctryst/api/test/doctor', controller.postAllDoctors);
+
+  app.post('/doctryst/api/test/patient', controller.postAllPatients);
+
+	app.get('/doctryst/api/test/doctors', controller.getAllDoctors);
+
+	app.get('/doctryst/api/test/patients', controller.getAllPatients);
+
+
+};
